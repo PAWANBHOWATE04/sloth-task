@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SlothTask — AI-Powered Task Simplifier</title>
+  <meta name="description" content="SlothTask helps you transform messy notes and overwhelming to-do lists into simple, prioritized, actionable plans using open-weight AI — all in your browser." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo-group">
+        <div class="logo-icon" aria-hidden="true">🦥</div>
+        <div class="logo-text">
+          <span class="logo-name">SlothTask</span>
+          <span class="logo-tagline">Do less thinking. Get more done.</span>
+        </div>
+      </div>
+      <div class="header-badge">🌿 Powered by open-weight AI</div>
+    </div>
+  </header>
+
+  <!-- ===== MAIN ===== -->
+  <main class="main-content">
+
+    <!-- Hero intro -->
+    <section class="hero" aria-labelledby="hero-heading">
+      <h1 id="hero-heading" class="hero-title">Clear your mind.<br>Simplify your day.</h1>
+      <p class="hero-description">
+        Dump everything swirling in your head — tasks, deadlines, errands, ideas — and SlothTask's
+        on-device AI will quietly sort it all into a calm, prioritized action plan. No accounts,
+        no cloud, no chaos.
+      </p>
+    </section>
+
+    <!-- ===== INPUT CARD ===== -->
+    <section class="card input-card" aria-labelledby="input-heading">
+      <h2 id="input-heading" class="card-title">What's on your mind?</h2>
+
+      <div class="textarea-wrapper">
+        <textarea
+          id="task-input"
+          class="task-textarea"
+          placeholder="Everything on your mind? Assignments, deadlines, errands, reminders... put it all here."
+          aria-label="Enter your tasks and thoughts"
+          rows="7"
+          maxlength="4000"
+        ></textarea>
+        <div class="char-counter" id="char-counter" aria-live="polite">0 / 4000</div>
+      </div>
+
+      <div class="input-actions">
+        <button id="simplify-btn" class="btn btn-primary" aria-label="Simplify my tasks with AI">
+          <span class="btn-icon">✨</span>
+          <span class="btn-label">Simplify My Day</span>
+        </button>
+        <button id="start-over-btn" class="btn btn-secondary hidden" aria-label="Start over and clear results">
+          <span class="btn-icon">↺</span>
+          <span class="btn-label">Start Over</span>
+        </button>
+      </div>
+
+      <!-- Validation message -->
+      <div id="validation-msg" class="validation-msg hidden" role="alert" aria-live="assertive"></div>
+    </section>
+
+    <!-- ===== STATUS / LOADING SECTION ===== -->
+    <section id="status-section" class="card status-card hidden" aria-live="polite" aria-label="Processing status">
+      <div class="status-inner">
+        <div class="spinner" aria-hidden="true">
+          <div class="spinner-ring"></div>
+          <div class="sloth-spinner">🦥</div>
+        </div>
+        <div class="status-text-group">
+          <p id="status-title" class="status-title">Initializing...</p>
+          <p id="status-detail" class="status-detail">Please wait</p>
+        </div>
+      </div>
+
+      <!-- Progress bar (shown during model download) -->
+      <div id="progress-wrap" class="progress-wrap hidden">
+        <div class="progress-bar-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progress-bar-aria">
+          <div id="progress-bar-fill" class="progress-bar-fill"></div>
+        </div>
+        <span id="progress-label" class="progress-label">0%</span>
+      </div>
+    </section>
+
+    <!-- ===== ERROR SECTION ===== -->
+    <section id="error-section" class="card error-card hidden" role="alert" aria-live="assertive">
+      <div class="error-inner">
+        <span class="error-icon" aria-hidden="true">😴</span>
+        <div class="error-text">
+          <p id="error-title" class="error-title">Something went wrong</p>
+          <p id="error-detail" class="error-detail"></p>
+        </div>
+      </div>
+      <button id="retry-btn" class="btn btn-secondary btn-sm">Try Again</button>
+    </section>
+
+    <!-- ===== RESULTS SECTION ===== -->
+    <section id="results-section" class="results-section hidden" aria-label="Your simplified task plan" aria-live="polite">
+      <h2 class="results-heading">
+        <span class="results-heading-icon">🦥</span>
+        Your Simplified Plan
+      </h2>
+
+      <div id="results-grid" class="results-grid">
+        <!-- Cards injected by JS -->
+      </div>
+
+      <p class="results-note">
+        Plan generated on-device using open-weight AI. Results reflect your input — no tasks were invented.
+      </p>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p class="footer-text">
+        🦥 <strong>SlothTask</strong> runs entirely in your browser.
+        Your tasks never leave your device.
+      </p>
+      <p class="footer-text footer-model">
+        Powered by <strong>SmolLM2-360M-Instruct</strong> (Hugging Face) via
+        <strong>Transformers.js</strong> — an open-weight model running locally.
+        First use downloads the model (~200 MB); subsequent visits use browser cache.
+      </p>
+      <p class="footer-text footer-compat">
+        Best experienced on Chrome, Edge, or Firefox with WebGPU support.
+        Falls back to WebAssembly on other browsers. Performance depends on your device.
+      </p>
+    </div>
+  </footer>
+
+  <script type="module" src="script.js"></script>
+</body>
+</html>
